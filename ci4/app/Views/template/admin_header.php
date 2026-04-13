@@ -10,7 +10,7 @@
         <header>
             <h1><?= $title; ?></h1>
         </header>
-        <nav>
+        <nav class="main-nav">
             <a href="<?= base_url('/admin'); ?>">Dashboard</a>
             <a href="<?= base_url('/admin/artikel'); ?>" class="active">Artikel</a>
             <a href="<?= base_url('/admin/artikel/add'); ?>">Tambah Artikel</a>

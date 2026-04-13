@@ -35,16 +35,24 @@ class Artikel extends BaseController
 
     public function admin_index()
     {
-        $title = 'Admin Portal Berita';
+        $title = 'Daftar Artikel';
+        $q = $this->request->getVar('q') ?? '';
         $model = new ArtikelModel();
 
         try {
-            $artikel = $model->findAll();
+            $artikel = $model->like('judul', $q)->paginate(10);
         } catch (DatabaseException $e) {
             $artikel = [];
         }
 
-        return view('artikel/admin_index', compact('artikel', 'title'));
+        $data = [
+            'title' => $title,
+            'q' => $q,
+            'artikel' => $artikel,
+            'pager' => $model->pager,
+        ];
+
+        return view('artikel/admin_index', $data);
     }
 
     public function add()
